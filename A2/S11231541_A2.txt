@@ -1,0 +1,43 @@
+Start:	read                           ; read n
+	store Acc_1                    ; store n in memory location storage_n
+	push                           ; push n onto the stack
+	call input_check               ; call input_check to check n 
+
+Main:   pop                            ; pop n from stack
+        call Print                     ; write output
+
+input_check: pop                          ; pop n from stack
+             subtract const_1             ; subtract 1 from n
+             jmpn case_1                  ; jump if (n < 1)
+             jmpz case_2                  ; jump if (n == 1)
+             call case_3                  ; jump if (n > 1)
+
+case_1: load Acc_1                     ; load n from memory location Acc_1 (Accumulator 1)
+        multiply Acc_1                 ; multiply n with itself => (n^2)
+	store Acc_2                    ; store n^2 in memory location Acc_2 
+        push                           ; push n onto the stack
+        return Main                    ; return to the Main subroutine to display output
+
+case_2:   load Acc_1                     ; load n from memory location Acc_1
+          subtract const_3		 ; subtract 5 => (n-5)
+          push                           ; push n onto the stack
+          return Main                    ; return to the Main subroutine to display output           
+
+case_3:   load Acc_1                     ; load n from memory location Acc_1
+          multiply Acc_1                 ; multiply n with itself => (n^2)
+          store Acc_2                    ; store n^2 in memory location Acc_2             
+          load Acc_1                     ; load n from memory location Acc_1
+          multiply const_2               ; multiply n with 3 => (3n)
+          add Acc_2                      ; add n^2 with 3n => (n^2 + 3n) in memory location Acc_2
+          add const_1                    ; add 1 from storage 1 (n^2 + 3n) => (n^2 + 3n + 1)
+          push 		                 ; push n onto the stack
+          return Main                    ; return to the Main subroutine to display output
+		  
+Print:	write				 ; write output
+	stop                             ; stop
+
+const_1:  .data 2 1                       ; storage for 1
+const_2:  .data 2 3                       ; storage for 3
+const_3:  .data 2 5                       ; storage for 5
+Acc_1:    .data 2 0                       ; storage for Accumulator 1
+Acc_2:    .data 2 0                       ; storage for Accumulator 2

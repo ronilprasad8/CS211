@@ -1,0 +1,26 @@
+0011000000000000 ;0 : 3  0  Read n
+0010000000110000 ;2 : 2  48 Store n in accumulator 1
+0110000000101010 ;4 : 6  42 Subtract 1
+1011000000001100 ;6 : 11 12 (If acc < 0)//jmpN to line 12
+1010000000010010 ;8 : 10 18 (else if accumulator == 0)//jmpZ to line 18
+1001000000011000 ;10: 9  24 (else accumulator > 0)//jump to line 24
+0001000000110000 ;12: 1  48 Load n from accumulator 1
+0111000000110000 ;14: 7  48 Multiply n with n
+1001000000100110 ;16: 9  38 Jump to write output
+0001000000110000 ;18: 1  48 Load n from accumulator 1
+0110000000101110 ;20: 6  46 Subtract 5 (n-5)
+1001000000100110 ;22: 9  38 Jump to write output
+0001000000110000 ;24: 1  48 Load n from accumulator 1
+0111000000110000 ;26: 7  48 Multiply n with n 
+0010000000110010 ;28: 2  50 Store n^2 accumulator 2
+0001000000110000 ;30: 1  48 Load n from accumulator 1
+0111000000101100 ;32: 7  44 Multiply 3 with n (3n)
+0101000000110010 ;34: 5  50 Add n^2 to 3n to make it (n^2 + 3n)
+0101000000101010 ;36: 5  42 Add 1: (n^2 + 3n) -> (n^2 + 3n + 1)
+0100000000000000 ;38: 4  0  Write the final output
+0000000000000000 ;40: 0  0  Stop
+0000000000000001 ;42: 0  1  Storage for 1
+0000000000000011 ;44: 0  3  Storage for 3
+0000000000000101 ;46: 0  5  Storage for 5
+0000000000000000 ;48: 0  0  Storage for accumulator 1
+0000000000000000 ;50: 0  0  Storage for accumulator 2
